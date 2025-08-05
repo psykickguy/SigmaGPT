@@ -5,8 +5,14 @@ function Sidebar() {
   return (
     <section className="sidebar">
       <button>
-        <img src="src/assets/backlogo.png" alt="gpt logo"></img>
-        <i className="fa-solid fa-pen-to-square"></i>
+        <img
+          src="src/assets/blacklogo.png"
+          alt="gpt logo"
+          className="logo"
+        ></img>
+        <span>
+          <i class="fa-solid fa-pen-to-square"></i>
+        </span>
       </button>
 
       <ul className="history">
