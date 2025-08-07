@@ -69,7 +69,7 @@ router.post("/chat", async (req, res) => {
   }
 
   try {
-    const thread = await Thread.findOne({
+    let thread = await Thread.findOne({
       threadId,
     });
 

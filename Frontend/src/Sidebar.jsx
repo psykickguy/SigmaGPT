@@ -11,7 +11,7 @@ function Sidebar() {
           className="logo"
         ></img>
         <span>
-          <i class="fa-solid fa-pen-to-square"></i>
+          <i className="fa-solid fa-pen-to-square"></i>
         </span>
       </button>
 
