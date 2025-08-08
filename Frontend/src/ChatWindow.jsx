@@ -34,7 +34,7 @@ function ChatWindow() {
       const response = await fetch("http://localhost:8080/api/chat", options);
       const res = await response.json();
       console.log(res.message);
-      setReply(res.reply);
+      setReply(res.message);
     } catch (err) {
       console.log(err);
     }
@@ -43,20 +43,19 @@ function ChatWindow() {
 
   useEffect(() => {
     if (prompt && reply) {
-      setPrevChats((prevChats) => {
-        [
-          ...prevChats,
-          {
-            role: "user",
-            content: prompt,
-          },
-          {
-            role: "assistant",
-            content: reply,
-          },
-        ];
-      });
+      setPrevChats((prevChats) => [
+        ...prevChats,
+        {
+          role: "user",
+          content: prompt,
+        },
+        {
+          role: "assistant",
+          content: reply,
+        },
+      ]);
     }
+
     setPrompt("");
   }, [reply]);
 
