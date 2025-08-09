@@ -40,6 +40,11 @@ button:hover {
   margin: 10px;
   padding: 10px;
   height: 100%;
+  overflow-y: scroll;
+}
+
+.history::-webkit-scrollbar {
+  display: none;
 }
 
 .history li {
@@ -78,4 +83,9 @@ button:hover {
 
 .fa-trash:hover {
   color: #f87171 !important;
+}
+
+.highlighted {
+  background-color: rgba(180, 180, 180, 0.05);
+  border-radius: 10px;
 }

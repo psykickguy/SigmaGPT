@@ -4,6 +4,10 @@
   padding: 8rem;
 }
 
+.chats::-webkit-scrollbar {
+  display: none;
+}
+
 .userDiv {
   display: flex;
   justify-content: flex-end;
