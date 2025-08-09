@@ -1,7 +1,64 @@
-import React from "react";
 import "./Sidebar.css";
+import { useContext, useEffect } from "react";
+import { MyContext } from "./MyContext";
+import { v1 as uuidv1 } from "uuid";
 
 function Sidebar() {
+  const {
+    allThreads,
+    setAllThreads,
+    currThreadId,
+    setNewChat,
+    setPropmt,
+    setReply,
+    setCurrThreadId,
+    setPrevChats,
+  } = useContext(MyContext);
+
+  const getAllThreads = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/thread");
+      const res = await response.json();
+      const filteredData = res.map((thread) => ({
+        threadId: thread.threadId,
+        title: thread.title,
+      }));
+      console.log(filteredData);
+      setAllThreads(filteredData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllThreads();
+  }, [currThreadId]);
+
+  const createNewChat = () => {
+    setNewChat(true);
+    setPropmt("");
+    setReply(null);
+    setCurrThreadId(uuidv1);
+    setPrevChats([]);
+  };
+
+  const changeThread = async (newThreadId) => {
+    setCurrThreadId(newThreadId);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/thread/${newThreadId}`
+      );
+      const res = await response.json();
+      console.log(res);
+      setPrevChats(res);
+      setNewChat(false);
+      setReply(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <section className="sidebar">
       <button>
@@ -16,9 +73,11 @@ function Sidebar() {
       </button>
 
       <ul className="history">
-        <li>history1</li>
-        <li>history1</li>
-        <li>history1</li>
+        {allThreads?.map((thread, idx) => (
+          <li key={idx} onClick={() => changeThread(thread.threadId)}>
+            {thread.title}
+          </li>
+        ))}
       </ul>
 
       <div className="sign">
